@@ -1,8 +1,11 @@
 import express from "express";
+import expressEjsLayouts from "express-ejs-layouts";
 import bodyParser from "body-parser";
 
 const app = express();
-app.use(bodyParser.json());
+app.use(expressEjsLayouts);
+app.set("view engine", "ejs");
+// app.use(bodyParser.json());
 
 //Route
 import indexRouter from "./routes/indexRoute.js";
