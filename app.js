@@ -11,7 +11,7 @@ app.set("view engine", "ejs");
 import indexRouter from "./routes/indexRoute.js";
 app.use("/", indexRouter);
 import userRouter from "./routes/userRoute.js";
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 
 const PORT = process.env.PORT || 3000;
 
