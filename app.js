@@ -1,11 +1,17 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import bodyParser from "body-parser";
+import { dbConnection } from "./database/db.js";
 
 const app = express();
+
+//EJS
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
 // app.use(bodyParser.json());
+
+// Bodyparser
+app.use(express.urlencoded({ extended: false }));
 
 //Route
 import indexRouter from "./routes/indexRoute.js";
