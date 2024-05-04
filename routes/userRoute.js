@@ -1,6 +1,7 @@
 import express from "express";
 import { User } from "../models/user.js";
 import bcrypt from "bcryptjs";
+import passport from "passport";
 
 const router = express.Router();
 
@@ -68,12 +69,29 @@ router.post("/register", (req, res) => {
         newUser
           .save()
           .then((user) => {
+            req.flash("success_msg", "you are now registered and can login");
             res.redirect("/user/login");
           })
           .catch((err) => console.log(err));
       }
     });
   }
+});
+
+//login handler
+router.post("/login", async (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "/user/login",
+    failureFlash: true,
+  })(req, res, next);
+});
+
+//logout handler
+router.post("/logout", (req, res) => {
+  req.logOut();
+  req.flash("success_msg", "you are logged out");
+  res.redirect("/user/login");
 });
 
 export default router;
